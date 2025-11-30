@@ -1,5 +1,7 @@
 package com.example.renttracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -14,10 +16,16 @@ public class RentData {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
+    @JsonIgnore
     private City city;
 
-    @Column(name = "average_rent_price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal avgRentPrice;
+    @JsonProperty("cityId")
+    public Long getCityId() {
+        return city != null ? city.getId() : null;
+    }
+
+    @Column(name = "rent_price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal rentPrice;
 
     @Column(name = "apartment_size", nullable = false)
     private Integer apartmentSize;
@@ -25,19 +33,14 @@ public class RentData {
     @Column(name = "data_date")
     private LocalDate date;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "data_source")
-    private DataSource dataSource;
-
     public RentData() {
     }
 
-    public RentData(City city, BigDecimal avgRentPrice, Integer apartmentSize, LocalDate date, DataSource dataSource) {
+    public RentData(City city, BigDecimal rentPrice, Integer apartmentSize, LocalDate date) {
         this.city = city;
-        this.avgRentPrice = avgRentPrice;
+        this.rentPrice = rentPrice;
         this.apartmentSize = apartmentSize;
         this.date = date;
-        this.dataSource = dataSource;
     }
 
     public Long getId() {
@@ -57,11 +60,11 @@ public class RentData {
     }
 
     public BigDecimal getAvgRentPrice() {
-        return avgRentPrice;
+        return rentPrice;
     }
 
     public void setAvgRentPrice(BigDecimal avgRentPrice) {
-        this.avgRentPrice = avgRentPrice;
+        this.rentPrice = avgRentPrice;
     }
 
     public Integer getApartmentSize() {
@@ -78,13 +81,5 @@ public class RentData {
 
     public void setDataDate(LocalDate dataDate) {
         this.date = dataDate;
-    }
-
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 }
