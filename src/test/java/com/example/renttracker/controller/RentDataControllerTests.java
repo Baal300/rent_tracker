@@ -2,7 +2,6 @@ package com.example.renttracker.controller;
 
 import com.example.renttracker.entity.City;
 import com.example.renttracker.entity.RentData;
-import com.example.renttracker.repository.CityRepository;
 import com.example.renttracker.repository.RentDataRepository;
 import org. junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +12,8 @@ import org.mockito.junit.jupiter. MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util. Arrays;
-import java.util. List;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito. Mockito.*;

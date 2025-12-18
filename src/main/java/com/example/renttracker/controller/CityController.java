@@ -1,7 +1,6 @@
 package com.example.renttracker.controller;
 
 import com.example.renttracker.entity.City;
-import com.example.renttracker.entity.RentData;
 import com.example.renttracker.repository.CityRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
