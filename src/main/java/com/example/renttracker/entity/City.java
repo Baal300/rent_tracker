@@ -1,6 +1,9 @@
 package com.example.renttracker.entity;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cities")
 public class City {
@@ -14,6 +17,10 @@ public class City {
 
     @Column(nullable = false)
     private String state;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RentData> rentDataList = new ArrayList<>();
+
 
     public City() {}
     public City(String name, String state) {
@@ -29,5 +36,12 @@ public class City {
 
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
+
+    public List<RentData> getRentDataList() { return rentDataList; }
+    public void setRentDataList(List<RentData> rentDataList) { this.rentDataList = rentDataList; }
+    public void addRentData(RentData rentData) {
+        this.rentDataList.add(rentData);
+        rentData.setCity(this);
+    }
 
 }
