@@ -1,9 +1,7 @@
-package com.example.renttracker;
+package com.example.renttracker.repository;
 
 import com.example.renttracker.entity.City;
 import com.example.renttracker.entity.RentData;
-import com.example.renttracker.repository.CityRepository;
-import com.example.renttracker.repository.RentDataRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
