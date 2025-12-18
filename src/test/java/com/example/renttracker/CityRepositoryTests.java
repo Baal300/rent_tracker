@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
-public class CityRepositoryTest {
+public class CityRepositoryTests {
 
     @Autowired
     private CityRepository cityRepository;
@@ -26,6 +26,12 @@ public class CityRepositoryTest {
         Optional<City> foundCity = Optional.ofNullable(cityRepository.findByName("Munich"));
         assertTrue(foundCity.isPresent(), "City should be found");
         assertEquals("Bavaria", foundCity.get().getState(), "State should match");
+    }
+
+    @Test
+    void testFindByNameNotFound() {
+        Optional<City> foundCity = Optional.ofNullable(cityRepository.findByName("NonExistentCity"));
+        assertTrue(foundCity.isEmpty(), "City should not be found");
     }
 
     @Test
