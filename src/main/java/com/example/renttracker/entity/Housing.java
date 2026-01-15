@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Entity
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 public class Housing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
@@ -20,30 +21,41 @@ public class Housing {
     private City city;
 
     @JsonProperty("cityId")
-    public Long getCityId() {
+    public long getCityId() {
         return city != null ? city.getId() : null;
     }
 
-    @Column(name = "rent_price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal rentPrice;
+    @Column(name = "rent_cost", nullable = false, precision = 10, scale = 2)
+    private BigDecimal rentCost;
+
+    @Column(name = "rent_per_sqm", precision = 10, scale = 2)
+    private BigDecimal rentPerSqm;
 
     @Column(name = "apartment_size", nullable = false)
-    private Integer apartmentSize;
+    private int apartmentSize;
 
     @Column(name = "data_date")
     private LocalDate date;
 
-    public Housing() {
+    private BigDecimal calculateRentPerSqm(BigDecimal rentCost, int apartmentSize) {
+        return rentCost.divide(BigDecimal.valueOf(apartmentSize), 2, RoundingMode.DOWN);
     }
 
-    public Housing(City city, BigDecimal rentPrice, Integer apartmentSize, LocalDate date) {
+    public Housing(BigDecimal rentCost, int apartmentSize) {
+        this.rentCost = rentCost;
+        this.apartmentSize = apartmentSize;
+        this.rentPerSqm = calculateRentPerSqm(rentCost, apartmentSize);
+    }
+
+    public Housing(City city, BigDecimal rentCost, int apartmentSize, LocalDate date) {
         this.city = city;
-        this.rentPrice = rentPrice;
+        this.rentCost = rentCost;
         this.apartmentSize = apartmentSize;
         this.date = date;
+        this.rentPerSqm = calculateRentPerSqm(rentCost, apartmentSize);
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -54,11 +66,13 @@ public class Housing {
         this.city = city;
     }
 
-    public Integer getApartmentSize() {
+    public int getApartmentSize() {
         return apartmentSize;
     }
-    public void setApartmentSize(Integer apartmentSize) {
+
+    public void setApartmentSize(int apartmentSize) {
         this.apartmentSize = apartmentSize;
+        rentPerSqm = calculateRentPerSqm(this.rentCost, apartmentSize);
     }
 
     public LocalDate getDataDate() {
@@ -68,6 +82,17 @@ public class Housing {
         this.date = dataDate;
     }
 
-    public BigDecimal getRentPrice() { return rentPrice; }
-    public void setRentPrice(BigDecimal rentPrice) { this.rentPrice = rentPrice; }
+    public BigDecimal getRentCost() { return rentCost; }
+
+    public void setRentCost(int rentCost) {
+        this.rentCost = BigDecimal.valueOf(rentCost);
+        rentPerSqm = calculateRentPerSqm(this.rentCost, apartmentSize);
+    }
+
+    public void setRentCost(double rentCost) {
+        this.rentCost = BigDecimal.valueOf(rentCost);
+        rentPerSqm = calculateRentPerSqm(this.rentCost, apartmentSize);
+    }
+
+    public BigDecimal getRentPerSqm() { return rentPerSqm; }
 }

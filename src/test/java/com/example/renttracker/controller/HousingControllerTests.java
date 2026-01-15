@@ -47,8 +47,8 @@ class HousingControllerTests {
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(BigDecimal.valueOf(450), result.get(0).getRentPrice());
-        assertEquals(BigDecimal.valueOf(600), result.get(1).getRentPrice());
+        assertEquals(BigDecimal.valueOf(450), result.get(0).getRentCost());
+        assertEquals(BigDecimal.valueOf(600), result.get(1).getRentCost());
 
         // Verify that findAll was called exactly once
         verify(housingRepository, times(1)).findAll();
