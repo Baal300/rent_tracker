@@ -19,7 +19,7 @@ public class City {
     private String state;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RentData> rentDataList = new ArrayList<>();
+    private List<Housing> housingList = new ArrayList<>();
 
 
     public City() {}
@@ -36,11 +36,12 @@ public class City {
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
 
-    public List<RentData> getRentDataList() { return rentDataList; }
-    public void setRentDataList(List<RentData> rentDataList) { this.rentDataList = rentDataList; }
-    public void addRentData(RentData rentData) {
-        this.rentDataList.add(rentData);
-        rentData.setCity(this);
+    public List<Housing> getRentDataList() { return housingList; }
+    public void setRentDataList(List<Housing> housingList) { this.housingList = housingList; }
+
+    public void addRentData(Housing housing) {
+        this.housingList.add(housing);
+        housing.setCity(this);
     }
 
 }

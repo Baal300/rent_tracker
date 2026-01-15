@@ -2,7 +2,7 @@ package com.example.renttracker.config;
 
 
 import com.example.renttracker.entity.City;
-import com.example.renttracker.entity.RentData;
+import com.example.renttracker.entity.Housing;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -25,7 +25,7 @@ public class DataInitializer implements CommandLineRunner {
         City berlin = new City("Berlin", "Berlin");
         City hamburg = new City("Hamburg", "Hamburg");
 
-        RentData rd = new RentData(munich, BigDecimal.valueOf(450), 18, LocalDate.of(2025, 11, 11));
+        Housing rd = new Housing(munich, BigDecimal.valueOf(450), 18, LocalDate.of(2025, 11, 11));
 
         entityManager.persist(munich);
         entityManager.persist(berlin);

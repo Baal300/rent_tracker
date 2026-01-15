@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "rent_data")
-public class RentData {
+public class Housing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,10 +33,10 @@ public class RentData {
     @Column(name = "data_date")
     private LocalDate date;
 
-    public RentData() {
+    public Housing() {
     }
 
-    public RentData(City city, BigDecimal rentPrice, Integer apartmentSize, LocalDate date) {
+    public Housing(City city, BigDecimal rentPrice, Integer apartmentSize, LocalDate date) {
         this.city = city;
         this.rentPrice = rentPrice;
         this.apartmentSize = apartmentSize;
@@ -47,27 +47,16 @@ public class RentData {
         return id;
     }
 
-
     public City getCity() {
         return city;
     }
-
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public BigDecimal getAvgRentPrice() {
-        return rentPrice;
-    }
-
-    public void setAvgRentPrice(BigDecimal avgRentPrice) {
-        this.rentPrice = avgRentPrice;
     }
 
     public Integer getApartmentSize() {
         return apartmentSize;
     }
-
     public void setApartmentSize(Integer apartmentSize) {
         this.apartmentSize = apartmentSize;
     }
@@ -75,8 +64,10 @@ public class RentData {
     public LocalDate getDataDate() {
         return date;
     }
-
     public void setDataDate(LocalDate dataDate) {
         this.date = dataDate;
     }
+
+    public BigDecimal getRentPrice() { return rentPrice; }
+    public void setRentPrice(BigDecimal rentPrice) { this.rentPrice = rentPrice; }
 }

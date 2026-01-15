@@ -1,8 +1,8 @@
 package com.example.renttracker.controller;
 
 import com.example.renttracker.entity.City;
-import com.example.renttracker.entity.RentData;
-import com.example.renttracker.repository.RentDataRepository;
+import com.example.renttracker.entity.Housing;
+import com.example.renttracker.repository.HousingRepository;
 import org. junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,38 +19,38 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito. Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class RentDataControllerTests {
+class HousingControllerTests {
     @Mock
-    private RentDataRepository rentDataRepository;
+    private HousingRepository housingRepository;
 
     @InjectMocks
-    private RentDataController rentDataController;
+    private HousingController housingController;
 
-    private RentData rentData1;
-    private RentData rentData2;
+    private Housing housing1;
+    private Housing housing2;
 
     @BeforeEach
     void setUp() {
         City munich = new City("Munich", "Bavaria");
         City berlin = new City("Berlin", "Berlin");
-        rentData1 = new RentData(munich, BigDecimal.valueOf(450), 18, LocalDate.of(2025, 11, 11));
-        rentData2 = new RentData(berlin, BigDecimal.valueOf(600), 25, LocalDate.of(2025, 12, 11));
+        housing1 = new Housing(munich, BigDecimal.valueOf(450), 18, LocalDate.of(2025, 11, 11));
+        housing2 = new Housing(berlin, BigDecimal.valueOf(600), 25, LocalDate.of(2025, 12, 11));
     }
 
     @Test
     void testGetAllRentData() {
-        List<RentData> rentDataList = Arrays.asList(rentData1, rentData2);
+        List<Housing> housingList = Arrays.asList(housing1, housing2);
         // Mock repository
-        when(rentDataRepository. findAll()).thenReturn(rentDataList);
+        when(housingRepository. findAll()).thenReturn(housingList);
 
-        List<RentData> result = rentDataController.getAllRentData();
+        List<Housing> result = housingController.getAllHousingData();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(BigDecimal.valueOf(450), result.get(0).getAvgRentPrice());
-        assertEquals(BigDecimal.valueOf(600), result.get(1).getAvgRentPrice());
+        assertEquals(BigDecimal.valueOf(450), result.get(0).getRentPrice());
+        assertEquals(BigDecimal.valueOf(600), result.get(1).getRentPrice());
 
         // Verify that findAll was called exactly once
-        verify(rentDataRepository, times(1)).findAll();
+        verify(housingRepository, times(1)).findAll();
     }
 }
