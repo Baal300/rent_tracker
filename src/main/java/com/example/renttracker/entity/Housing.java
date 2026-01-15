@@ -41,6 +41,8 @@ public class Housing {
         return rentCost.divide(BigDecimal.valueOf(apartmentSize), 2, RoundingMode.DOWN);
     }
 
+    public Housing() {}
+
     public Housing(BigDecimal rentCost, int apartmentSize) {
         this.rentCost = rentCost;
         this.apartmentSize = apartmentSize;
