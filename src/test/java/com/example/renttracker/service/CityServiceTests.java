@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,13 +47,19 @@ public class CityServiceTests {
     @Test
     void testGetCityByName() {
         when(cityRepository.findByName("Munich")).thenReturn(munich);
-        assertEquals(munich, cityService.getCityByName("Munich").orElse(null));
+
+        assertEquals(munich, cityService.getCityByName("Munich").orElse(null), "Should return Munich");
+        assertThrows(IllegalArgumentException.class, () -> cityService.getCityByName(""), "Should throw exception for empty city name");
+        assertThrows(IllegalArgumentException.class, () -> cityService.getCityByName(null), "Should throw exception for city = null");
     }
 
     @Test
     void testGetCityByState() {
         List<City> cities = Arrays.asList(munich, augsburg);
         when(cityRepository.findByState("Bavaria")).thenReturn(cities);
+
         assertEquals(cities, cityService.getCitiesByState("Bavaria"));
+        assertThrows(IllegalArgumentException.class, () -> cityService.getCitiesByState(""), "Should throw exception for empty state name");
+        assertThrows(IllegalArgumentException.class, () -> cityService.getCitiesByState(null), "Should throw exception for state = null");
     }
 }

@@ -16,9 +16,4 @@ class RenttrackerApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void getCityByName() {
-
-    }
-
 }
