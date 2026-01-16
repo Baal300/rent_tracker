@@ -22,7 +22,7 @@ public class Housing {
 
     @JsonProperty("cityId")
     public long getCityId() {
-        return city != null ? city.getId() : null;
+        return city.getId();
     }
 
     @Column(name = "rent_cost", nullable = false, precision = 10, scale = 2)

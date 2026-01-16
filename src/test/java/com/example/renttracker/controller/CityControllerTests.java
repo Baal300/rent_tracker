@@ -1,7 +1,7 @@
 package com.example.renttracker.controller;
 
 import com.example.renttracker.entity.City;
-import com.example.renttracker.repository.CityRepository;
+import com.example.renttracker.service.CityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CityControllerTests {
     @Mock
-    private CityRepository cityRepository;
+    private CityService cityService;
 
     @InjectMocks
     private CityController cityController;
@@ -35,7 +35,7 @@ class CityControllerTests {
     @Test
     void testGetAllCities() {
         List<City> cities = Arrays.asList(munich, berlin);
-        when(cityRepository.findAll()).thenReturn(cities);
+        when(cityService.getAllCities()).thenReturn(cities);
 
         List<City> result = cityController.getAllCities();
 
@@ -44,6 +44,6 @@ class CityControllerTests {
         assertEquals("Berlin", result.get(1).getName(), "Second city should be Berlin");
 
         // Verify that findAll was called exactly once
-        verify(cityRepository, times(1)).findAll();
+        verify(cityService, times(1)).getAllCities();
     }
 }

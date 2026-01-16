@@ -17,10 +17,9 @@ public class DataInitializer implements CommandLineRunner {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     @Transactional
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         City munich = new City("Munich", "Bavaria");
         City berlin = new City("Berlin", "Berlin");
         City hamburg = new City("Hamburg", "Hamburg");

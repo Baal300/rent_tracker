@@ -18,7 +18,7 @@ public class CityTests {
     }
 
     @Test
-    public void testAddRentData() {
+    void testAddRentData() {
         Housing housing1 = new Housing(city, BigDecimal.valueOf(800), 50, LocalDate.of(2025, 12, 1));
         Housing housing2 = new Housing(city, BigDecimal.valueOf(850), 55, LocalDate.of(2026, 1, 1));
         city.addRentData(housing1);

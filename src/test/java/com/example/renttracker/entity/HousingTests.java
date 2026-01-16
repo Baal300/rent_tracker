@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HousingTests {
     @Test
-    public void testGetRentPerSqm() {
+    void testGetRentPerSqm() {
         Housing housing = new Housing(BigDecimal.valueOf(1200), 25);
 
         assertEquals(
@@ -17,10 +17,10 @@ public class HousingTests {
                 BigDecimal.valueOf(48).compareTo(housing.getRentPerSqm()),
                 "Rent per sqm should be correctly calculated"
         );
-    };
+    }
 
     @Test
-    public void testSetRentCostWithInteger() {
+    void testSetRentCostWithInteger() {
         Housing housing = new Housing(BigDecimal.valueOf(1000), 20);
         housing.setRentCost(1500);
 
@@ -38,7 +38,7 @@ public class HousingTests {
     }
 
     @Test
-    public void testSetRentCostWithDouble() {
+    void testSetRentCostWithDouble() {
         Housing housing = new Housing(BigDecimal.valueOf(1000), 20);
         housing.setRentCost(1500.00d);
 
