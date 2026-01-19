@@ -18,17 +18,17 @@ public class CityTests {
     }
 
     @Test
-    void testAddRentData() {
+    void testAddHousing() {
         Housing housing1 = new Housing(city, BigDecimal.valueOf(800), 50, LocalDate.of(2025, 12, 1));
         Housing housing2 = new Housing(city, BigDecimal.valueOf(850), 55, LocalDate.of(2026, 1, 1));
-        city.addRentData(housing1);
-        city.addRentData(housing2);
+        city.addHousing(housing1);
+        city.addHousing(housing2);
         List<Housing> expectedHousingList = new java.util.ArrayList<>();
         expectedHousingList.add(housing1);
         expectedHousingList.add(housing2);
 
-        assertEquals(2, city.getRentDataList().size(), "City should have a RentData entry");
-        assertEquals(expectedHousingList, city.getRentDataList(), "RentData list should match the added entries");
-        assertEquals(city, city.getRentDataList().get(0).getCity(), "RentData's city should be set correctly");
+        assertEquals(2, city.getHousingList().size(), "City should have a RentData entry");
+        assertEquals(expectedHousingList, city.getHousingList(), "RentData list should match the added entries");
+        assertEquals(city, city.getHousingList().get(0).getCity(), "RentData's city should be set correctly");
     }
 }

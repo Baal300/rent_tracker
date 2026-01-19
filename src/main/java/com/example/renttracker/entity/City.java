@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "cities")
+@Table(name = "CITIES")
 public class City {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -36,10 +35,10 @@ public class City {
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
 
-    public List<Housing> getRentDataList() { return housingList; }
-    public void setRentDataList(List<Housing> housingList) { this.housingList = housingList; }
+    public List<Housing> getHousingList() { return housingList; }
+    public void setHousingList(List<Housing> housingList) { this.housingList = housingList; }
 
-    public void addRentData(Housing housing) {
+    public void addHousing(Housing housing) {
         this.housingList.add(housing);
         housing.setCity(this);
     }

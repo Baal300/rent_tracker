@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "rent_data")
+@Table(name = "HOUSING")
 public class Housing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

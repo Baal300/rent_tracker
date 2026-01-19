@@ -17,6 +17,4 @@ public interface HousingRepository extends JpaRepository<Housing, Long> {
     // Query to get average rent price for a given city name
     @Query("SELECT AVG(housing.rentCost) FROM Housing housing WHERE housing.city.name = ?1")
     BigDecimal findAverageRentPriceByCityName(String cityName);
-
-
 }
