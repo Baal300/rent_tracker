@@ -38,12 +38,12 @@ class HousingControllerTests {
     }
 
     @Test
-    void testGetAllRentData() {
+    void testGetAllHousingList() {
         List<Housing> housingList = Arrays.asList(housing1, housing2);
         // Mock repository
         when(housingRepository. findAll()).thenReturn(housingList);
 
-        List<Housing> result = housingController.getAllHousingData();
+        List<Housing> result = housingController.getAllHousingDTOs();
 
         assertNotNull(result);
         assertEquals(2, result.size());

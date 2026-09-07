@@ -13,14 +13,23 @@ import java.util.Optional;
 public class CityService {
     private final CityRepository cityRepository;
 
+    /**
+     * Creates CityService with given CityRepository.
+     */
     public CityService(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
     }
 
+    /**
+     * Returns all cities
+     */
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
 
+    /**
+     * Returns Optional object of city by name
+     */
     public Optional<City> getCityByName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("City name cannot be null or empty");
@@ -28,6 +37,9 @@ public class CityService {
         return Optional.ofNullable(cityRepository.findByName(name));
     }
 
+    /**
+     * Returns list of cities by state
+     */
     public List<City> getCitiesByState(String state) {
         if (state == null || state.trim().isEmpty()) {
             throw new IllegalArgumentException("State name cannot be null or empty");
