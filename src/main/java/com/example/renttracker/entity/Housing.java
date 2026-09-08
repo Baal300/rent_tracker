@@ -57,6 +57,15 @@ public class Housing {
         this.rentPerSqm = calculateRentPerSqm(rentCost, apartmentSize);
     }
 
+    public Housing(long id, City city, BigDecimal rentCost, int apartmentSize, LocalDate date) {
+        this.id = id;
+        this.city = city;
+        this.rentCost = rentCost;
+        this.apartmentSize = apartmentSize;
+        this.date = date;
+        this.rentPerSqm = calculateRentPerSqm(rentCost, apartmentSize);
+    }
+
     public long getId() {
         return id;
     }

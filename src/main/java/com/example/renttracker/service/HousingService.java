@@ -34,7 +34,7 @@ public class HousingService {
 
 
     /**
-     * Returns housing entry by id
+     * Returns housing entry by id.
      */
     public Housing getHousingById(long id) {
         return housingRepository.findById(id)
@@ -42,7 +42,7 @@ public class HousingService {
     }
 
     /**
-     * Returns housing entry by city name
+     * Returns housing entry by city name.
      */
     public List<Housing> getHousingByCity(String cityName) {
         if (cityName == null || cityName.trim().isEmpty()) {
@@ -52,7 +52,7 @@ public class HousingService {
     }
 
     /**
-     * Returns housing entry by city object
+     * Returns housing entry by city object.
      */
     public List<Housing> getHousingByCity(City city) {
         if (city == null) {
@@ -62,7 +62,7 @@ public class HousingService {
     }
 
     /**
-     * Returns housing entries by city id
+     * Returns housing entries by city id.
      */
     public List<Housing> getHousingByCity(long cityId) {  return housingRepository.findByCityId(cityId); }
 
