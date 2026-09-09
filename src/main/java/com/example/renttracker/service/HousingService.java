@@ -1,5 +1,6 @@
 package com.example.renttracker.service;
 
+import com.example.renttracker.dto.CreateHousingDTO;
 import com.example.renttracker.entity.City;
 import com.example.renttracker.entity.Housing;
 import com.example.renttracker.repository.CityRepository;
@@ -71,8 +72,17 @@ public class HousingService {
      * Creates housing and saves to database. Returns the created housing entry.
      */
     @Transactional
-    public Housing createHousing(String cityName, BigDecimal rentCost, int apartmentSize, LocalDate date) {
-        // Validate inputs
+    public Housing createHousing(CreateHousingDTO createHousingDTO) {
+        if (createHousingDTO == null) {
+            throw new IllegalArgumentException("CreateHousingDTO cannot be null");
+        }
+
+        String cityName = createHousingDTO.getCity();
+        BigDecimal rentCost = createHousingDTO.getRentCost();
+        int apartmentSize = createHousingDTO.getApartmentSize();
+        LocalDate date = createHousingDTO.getDate();
+
+        // Validate input
         if (cityName == null || cityName.trim().isEmpty()) {
             throw new IllegalArgumentException("City name cannot be null or empty");
         }
@@ -81,6 +91,9 @@ public class HousingService {
         }
         if (apartmentSize <= 0) {
             throw new IllegalArgumentException("Apartment size must be positive");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
         }
 
         // Find the city

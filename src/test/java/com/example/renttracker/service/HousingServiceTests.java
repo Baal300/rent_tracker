@@ -1,5 +1,6 @@
 package com.example.renttracker.service;
 
+import com.example.renttracker.dto.CreateHousingDTO;
 import com.example.renttracker.entity.City;
 import com.example.renttracker.entity.Housing;
 import com.example.renttracker.repository.CityRepository;
@@ -110,16 +111,21 @@ public class HousingServiceTests {
                 LocalDate.of(2026, 2, 1)
         );
 
+        CreateHousingDTO createHousingDTO = new CreateHousingDTO(
+                "Cologne",
+                BigDecimal.valueOf(550),
+                21,
+                LocalDate.of(2026, 2, 1)
+        );
+
         when(cityRepository.findByName("Cologne")).thenReturn(cologne);
         when(housingRepository.save(any(Housing.class))).thenReturn(expectedHousing);
+
 
         assertEquals(
                 expectedHousing,
                 housingService.createHousing(
-                        "Cologne",
-                        BigDecimal.valueOf(550),
-                        21,
-                        LocalDate.of(2026, 2, 1)
+                        createHousingDTO
                 )
         );
     }

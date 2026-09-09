@@ -1,13 +1,13 @@
 package com.example.renttracker.controller;
 
+import com.example.renttracker.dto.CreateHousingDTO;
 import com.example.renttracker.dto.HousingDTO;
 import com.example.renttracker.dto.Mapper;
 import com.example.renttracker.service.HousingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -40,5 +40,16 @@ public class HousingController {
                 .stream()
                 .map(mapper::toDto)
                 .collect(toList());
+    }
+
+    /**
+     * Creates a Housing entry on a post request.
+     */
+    @PostMapping("/housing")
+    public ResponseEntity<HousingDTO> createHousing(@RequestBody CreateHousingDTO createHousingDTO) {
+        logger.info("Housing data creation requested");
+        return ResponseEntity
+                .status(201)
+                .body(mapper.toDto(housingService.createHousing(createHousingDTO)));
     }
 }
