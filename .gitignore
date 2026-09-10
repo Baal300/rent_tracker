@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Python ###
+.venv/
+.ipynb_checkpoints/
+.virtual_documents/
