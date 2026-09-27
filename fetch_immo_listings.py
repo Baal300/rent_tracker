@@ -1,6 +1,6 @@
 import requests
-import json
 import csv
+import datetime as dt
 
 cities = {
     "Berlin": {"name": "berlin", "state": "berlin"},
@@ -62,6 +62,7 @@ def save_to_csv(data, filename):
 
 if __name__ == "__main__":
     data = []
+    retrieval_date = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for city in cities:
         result = fetch_listings(cities[city])
@@ -88,13 +89,17 @@ if __name__ == "__main__":
                     )
                     data.append(
                         {
-                            # "title": entry["item"]["title"],
+                            # TODO retrieve an id for each listing to avoid duplicates
+                            # "id": id,
                             "price": price,
                             "size": size,
                             "city": city,
+                            "retrieval_date": retrieval_date,
                         }
                     )
             except Exception as e:
                 print(f"Error: {e}")
 
-    save_to_csv(data, "data/immo_listings.csv")
+    save_to_csv(
+        data, f"data/immo_listings_{dt.datetime.now().strftime("%Y-%m-%d")}.csv"
+    )

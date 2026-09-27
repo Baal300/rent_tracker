@@ -16,7 +16,9 @@ def post_csv_data():
                     "rentCost": float(row["price"]),
                     "apartmentSize": float(row["size"]),
                     "city": row["city"],
-                    "date": datetime.datetime.now().isoformat(),  # TODO set date of when listing was scraped
+                    "date": row[
+                        "retrieval_date"
+                    ],  # TODO set date of when listing was scraped
                 }
 
                 try:
