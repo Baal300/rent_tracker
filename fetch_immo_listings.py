@@ -72,6 +72,7 @@ if __name__ == "__main__":
                 entries = result["resultListItems"]
 
                 for entry in entries:
+                    id = entry["item"]["id"]
                     # Remove "€" and "." from the price string
                     price = (
                         entry["item"]["attributes"][0]["value"]
@@ -90,7 +91,7 @@ if __name__ == "__main__":
                     data.append(
                         {
                             # TODO retrieve an id for each listing to avoid duplicates
-                            # "id": id,
+                            "id": id,
                             "price": price,
                             "size": size,
                             "city": city,
