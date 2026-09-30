@@ -1,0 +1,6 @@
+### Python ###
+.venv/
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
+.ipynb_checkpoints/

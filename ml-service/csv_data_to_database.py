@@ -1,22 +1,25 @@
 import requests
 import csv
-import datetime
+import sys
+import datetime as dt
 
 url = "http://localhost:8080/housing"
-csv_file = "data/immo_listings.csv"
 
 
-def post_csv_data():
+def post_csv_data(file):
     try:
-        with open(csv_file, mode="r", encoding="utf-8") as file:
+        with open(file, mode="r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 # Convert CSV string values into correct types for JSON payload
                 payload = {
+                    # "id": row["id"],
                     "rentCost": float(row["price"]),
                     "apartmentSize": float(row["size"]),
                     "city": row["city"],
-                    "date": datetime.datetime.now().isoformat(),  # TODO set date of when listing was scraped
+                    "date": dt.datetime.strptime(
+                        row["retrieval_date"], "%Y-%m-%d %H:%M:%S"
+                    ).isoformat(),
                 }
 
                 try:
@@ -34,5 +37,14 @@ def post_csv_data():
         print(f"Could not find the file '{file}'.")
 
 
+def main(args):
+    if len(args) < 2:
+        print("Hint: Pass a csv file as argument")
+        sys.exit(1)
+    print(sys.argv)
+    csv_file = args[1]
+    post_csv_data(csv_file)
+
+
 if __name__ == "__main__":
-    post_csv_data()
+    main(sys.argv)
