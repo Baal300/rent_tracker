@@ -90,7 +90,6 @@ if __name__ == "__main__":
                     )
                     data.append(
                         {
-                            # TODO retrieve an id for each listing to avoid duplicates
                             "id": id,
                             "price": price,
                             "size": size,
@@ -102,5 +101,5 @@ if __name__ == "__main__":
                 print(f"Error: {e}")
 
     save_to_csv(
-        data, f"data/immo_listings_{dt.datetime.now().strftime("%Y-%m-%d")}.csv"
+        data, f"../data/immo_listings_{dt.datetime.now().strftime("%Y-%m-%d")}.csv"
     )

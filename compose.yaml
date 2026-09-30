@@ -1,11 +1,11 @@
 services:
-#  TODO Enable CORS from docker container
-#  api:
-#    build: .
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres
+  ml-service:
+    build:
+      context: ./python-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/data:ro
 
   postgres:
     image: postgres:18
