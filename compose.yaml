@@ -1,7 +1,7 @@
 services:
   ml-service:
     build:
-      context: ./python-service
+      context: ./ml-service
     ports:
       - "8001:8001"
     volumes:
@@ -23,12 +23,5 @@ services:
     ports:
       - "8088:80"
     environment:
-      # Required by pgAdmin
       PGADMIN_DEFAULT_EMAIL: demo@example.com
       PGADMIN_DEFAULT_PASSWORD: secret
-
-      # Don't require the user to login
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-
-      # Don't require a "master" password after logging in
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'

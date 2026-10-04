@@ -29,7 +29,7 @@ class PredictionRequest(BaseModel):
 
 class PredictionResponse(BaseModel):
     apartmentSize: int
-    predictedRentCost: float
+    predictedRent: float
 
 
 def train_models() -> None:
@@ -73,12 +73,12 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/predict", response_model=PredictionResponse)
+@app.get("/prediction", response_model=PredictionResponse)
 def predict(apartmentSize: int, city: str) -> PredictionResponse:
     prediction = model_berlin.predict(np.array([apartmentSize]).reshape(-1, 1)).item()
     print(f"Predicted rent cost for {apartmentSize} sqm in {city}: {prediction}")
 
     return PredictionResponse(
         apartmentSize=apartmentSize,
-        predictedRentCost=round(float(prediction), 2),
+        predictedRent=round(float(prediction), 2),
     )
